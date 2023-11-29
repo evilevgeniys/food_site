@@ -144,7 +144,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //setTimeoutForModalWindow
 
-    // const modalTimerId = setTimeout(showModal, 5000);
+    const modalTimerId = setTimeout(showModal, 50000);
 
     function showModalByScroll(){
         if(window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight - 1){
@@ -289,15 +289,17 @@ window.addEventListener('DOMContentLoaded', () => {
 
         prevModalDialog.classList.add('hide');
 
-        openModal();
+        showModal();
 
         const thanksModal = document.createElement('div');
         thanksModal.classList.add('.modal__dialog');
 
         thanksModal.innerHTML = `
-            <div class = 'modal__content'>
-                <div class="modal__close" data-close>&times;</div>
-                <div class="modal__title">${message}</div>
+            <div class="modal__dialog">
+                <div class="modal__content">
+                    <div class="modal__close" data-close>×</div>
+                    <div class="modal__title">${message}</div>
+                </div>
             </div>
         `;
 
@@ -308,6 +310,6 @@ window.addEventListener('DOMContentLoaded', () => {
             prevModalDialog.classList.add('show');
             prevModalDialog.classList.remove('hide');
             closeModal();
-        }, 4000);
+        }, 600000);
      }
 })
