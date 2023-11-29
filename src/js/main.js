@@ -109,8 +109,7 @@ window.addEventListener('DOMContentLoaded', () => {
     //create modal window
 
     const modalTrigger = document.querySelectorAll('[data-modal]'),
-          modal = document.querySelector('.modal'),
-          modalCloseBtn = document.querySelector('[data-close]');
+          modal = document.querySelector('.modal');
     
    
     function showModal(){
@@ -130,10 +129,9 @@ window.addEventListener('DOMContentLoaded', () => {
         item.addEventListener('click', showModal);
     })
    
-    modalCloseBtn.addEventListener('click', closeModal)
-
+    
     modal.addEventListener('click', (e) => {
-        if(e.target === modal){
+        if(e.target === modal || e.target.getAttribute('data-close') == ''){
             closeModal();
         }
     })
@@ -287,5 +285,23 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
         })
+     }
+
+     function showThanksModal() {
+        const prevModalDialog = document.querySelector('.modal__dialog');
+
+        prevModalDialog.classList.add('hide');
+
+        openModal();
+
+        const thanksModal = document.createElement('div');
+        thanksModal.classList.add('.modal__dialog');
+
+        thanksModal.innerHTML = `
+            <div class = 'modal__content'>
+                <div class="modal__close" data-close>&times;</div>
+                <div class="modal__title"></div>
+            </div>
+        `
      }
 })
