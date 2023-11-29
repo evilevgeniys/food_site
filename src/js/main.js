@@ -271,14 +271,11 @@ window.addEventListener('DOMContentLoaded', () => {
             request.addEventListener('load', () => {
                 if(request.status === 200){
                     console.log(request.response);
-                    statusMessage.textContent = message.success;
+                    showThanksModal(message.success);
                     form.reset();
-                    setTimeout(() => {
-                        statusMessage.remove()
-                    }, 2000);
+                    statusMessage.remove();
                 } else {
-                    statusMessage.textContent = message.failure;
-
+                    showThanksModal(message.failure);
                 }
             }) 
 
@@ -287,7 +284,7 @@ window.addEventListener('DOMContentLoaded', () => {
         })
      }
 
-     function showThanksModal() {
+     function showThanksModal(message) {
         const prevModalDialog = document.querySelector('.modal__dialog');
 
         prevModalDialog.classList.add('hide');
@@ -300,8 +297,17 @@ window.addEventListener('DOMContentLoaded', () => {
         thanksModal.innerHTML = `
             <div class = 'modal__content'>
                 <div class="modal__close" data-close>&times;</div>
-                <div class="modal__title"></div>
+                <div class="modal__title">${message}</div>
             </div>
-        `
+        `;
+
+        document.querySelector('.modal').append(thanksModal);
+
+        setTimeout(() => {
+            thanksModal.remove();
+            prevModalDialog.classList.add('show');
+            prevModalDialog.classList.remove('hide');
+            closeModal();
+        }, 4000);
      }
 })
