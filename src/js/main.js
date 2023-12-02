@@ -197,6 +197,18 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    //получение ресурсов с сервера
+
+    const getResource = async (url) => { 
+        const res = await fetch(url);
+
+        if(!res.ok){
+            throw new Error(`Could not fetch ${url}, status: ${res.status}`);
+        }
+
+        return await res.json();
+    }
+
      new MenuCards(
         'img/tabs/vegy.jpg',
         'vegy',
@@ -239,10 +251,22 @@ window.addEventListener('DOMContentLoaded', () => {
      };
 
      forms.forEach(item => {
-        postData(item);
+        bindPostData(item);
      })
 
-     function postData(form){
+     const postData = async (url, data) => {
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: data
+        });
+
+        return await res.json();
+    }    
+
+     function bindPostData(form){
         form.addEventListener('submit', (e) => {
             e.preventDefault(); // самая первая команда, которая должна быть написана при AJAX запросах!!!!
             
@@ -259,20 +283,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
             const formData = new FormData(form);
 
-            const object = {};
+            const json = JSON.stringify(Object.fromEntries(formData.entries())); //Элегантный способ преобразования в JSON обьект
 
-            formData.forEach((value, key) => {
-                object[key] = value;
-            });
 
-            fetch('server.php', {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify(object)
-            })
-            .then(data => data.text())
+            postData('http://localhost:3000/requests', json)
             .then(data => {
                 console.log(data);
                 showThanksModal(message.success);
