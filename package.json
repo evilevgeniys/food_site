@@ -18,7 +18,7 @@
     "autoprefixer": "^10.4.14",
     "babel-loader": "^9.1.2",
     "browser-sync": "^2.23.7",
-    "gulp": "^4.0.2",
+    "gulp": "^3.9.1",
     "gulp-clean-css": "^4.3.0",
     "gulp-postcss": "^9.0.1",
     "gulp-sass": "^5.1.0",
@@ -35,8 +35,8 @@
     "url": "https://github.com/evilevgeniys/food_site/issues"
   },
   "homepage": "https://github.com/evilevgeniys/food_site#readme",
-  "description": "",
   "dependencies": {
     "json-server": "^0.17.4"
-  }
+  },
+  "description": ""
 }
