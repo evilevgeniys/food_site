@@ -19,12 +19,5 @@ window.addEventListener('DOMContentLoaded', () => {
      fetch('http://localhost:3000/menu')
         .then(data => data.json())
         .then(res => console.log(res));
-
-
-
-    //создаем "Калькулятор"
-
-    
-    
-    
+     
 })
